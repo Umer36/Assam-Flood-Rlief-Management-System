@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/Assam-Flood-Rlief-Management-System/static/css/main.eae02fd0.css",
+    "main.js": "/Assam-Flood-Rlief-Management-System/static/js/main.3bf3c59e.js",
+    "static/js/787.6b948872.chunk.js": "/Assam-Flood-Rlief-Management-System/static/js/787.6b948872.chunk.js",
+    "static/media/rescue-team.jpg": "/Assam-Flood-Rlief-Management-System/static/media/rescue-team.06f9686696c0ca18096c.jpg",
+    "static/media/rescue.png": "/Assam-Flood-Rlief-Management-System/static/media/rescue.6be3fd411a5ac70597fd.png",
+    "static/media/homepage1.jpeg": "/Assam-Flood-Rlief-Management-System/static/media/homepage1.4df381687d4a7f4190c5.jpeg",
+    "static/media/homepage2.jpeg": "/Assam-Flood-Rlief-Management-System/static/media/homepage2.4804bca46dfc19769bca.jpeg",
+    "static/media/food-med.jpg": "/Assam-Flood-Rlief-Management-System/static/media/food-med.11170a93fb9d6bbe8dbc.jpg",
+    "static/media/medical.png": "/Assam-Flood-Rlief-Management-System/static/media/medical.6cc0434296efc3c4a030.png",
+    "static/media/shelter.png": "/Assam-Flood-Rlief-Management-System/static/media/shelter.de1e24efb5a5620d5245.png",
+    "static/media/success.png": "/Assam-Flood-Rlief-Management-System/static/media/success.cb6a554a3c532fc95d9a.png",
+    "static/media/alert.jpeg": "/Assam-Flood-Rlief-Management-System/static/media/alert.9ebaf71baa5e6e58b4d1.jpeg",
+    "static/media/helpinghand.jpeg": "/Assam-Flood-Rlief-Management-System/static/media/helpinghand.38f2b604fbb011d8feef.jpeg",
+    "static/media/helpline.jpeg": "/Assam-Flood-Rlief-Management-System/static/media/helpline.7cff8fb965e30c1d0d27.jpeg",
+    "index.html": "/Assam-Flood-Rlief-Management-System/index.html",
+    "main.eae02fd0.css.map": "/Assam-Flood-Rlief-Management-System/static/css/main.eae02fd0.css.map",
+    "main.3bf3c59e.js.map": "/Assam-Flood-Rlief-Management-System/static/js/main.3bf3c59e.js.map",
+    "787.6b948872.chunk.js.map": "/Assam-Flood-Rlief-Management-System/static/js/787.6b948872.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.eae02fd0.css",
+    "static/js/main.3bf3c59e.js"
+  ]
+}
