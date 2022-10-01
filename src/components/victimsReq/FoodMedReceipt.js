@@ -13,7 +13,8 @@ import { useNavigate } from "react-router-dom";
 
 function FoodMedReceipt() {
   const [reliefData, setVictims] = useState({});
-  const navigate=useNavigate();
+  
+  const navigate = useNavigate();
   console.log("testing");
   useEffect(() => {
     getreliefData();

@@ -26,6 +26,8 @@ function RescueForm() {
     milk: "",
   };
   const [inputs, setinputs] = useState(initialInput);
+  
+  const navigate = useNavigate();
   let onValueChange = (e) => {
     console.log(e.target.value, e.target.name);
     setinputs({ ...inputs, [e.target.name]: e.target.value });
@@ -71,7 +73,6 @@ function RescueForm() {
     
   };
 
-  const navigate = useNavigate();
   const styles = {
     cardstyle: {
       width: "40rem",
