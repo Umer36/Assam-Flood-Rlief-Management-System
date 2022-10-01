@@ -146,7 +146,7 @@ function FoodMedReceipt() {
               </Table>
 
               <div className="d-flex justify-content-center mt-5">
-                <Button variant="success" type="submit">
+                <Button variant="success" onClick={naviagte("/")} type="submit">
                   Print
                 </Button>
               </div>

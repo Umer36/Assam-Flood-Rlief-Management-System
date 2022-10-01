@@ -10,6 +10,7 @@ import Alert from "react-bootstrap/Alert";
 
 import { getLoginApi } from '../../services/api';
 import { doLogin } from '../../auth';
+import { toast } from 'react-toastify';
 let User;
 const InitialValues ={
       "roleType" : "",
@@ -88,7 +89,15 @@ export default function LogIn() {
               console.log("Get Login Succees")
               console.log(token)
               //toast sucess
-
+              toast.success('🦄 Login of Victim Successfull..!!!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
               //save data to local storage
               doLogin(token,() =>{
                 console.log("Token Details stored to local storage")
@@ -100,8 +109,26 @@ export default function LogIn() {
               console.log(error)
               if(error.response.status==400 || error.response.status==404){
                   console.log(error.response.data.message)
+                  toast.error('🦄 Oopss something went wrong..!!!', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    });
               }else{
                 console.log("somehting went alah hi server pe")
+                toast.error('🦄 Oopss something went wrong on Server..!!!', {
+                  position: "top-right",
+                  autoClose: 5000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  });
               }
               //toast error
             })

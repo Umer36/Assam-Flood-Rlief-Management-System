@@ -47,10 +47,28 @@ function RescueForm() {
   })
     .then(function (response) {
       console.log(response);
+      toast.success('🦄 Request for Rescue Submitted Hold On..!!!', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
       navigate("/victims/requestSlip");
     })
     .catch(function (error) {
       console.log(error);
+      toast.error('🦄 Oopss something went wrong..!!!', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
     });
 
 

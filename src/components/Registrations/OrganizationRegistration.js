@@ -7,6 +7,7 @@ import Card from "react-bootstrap/Card";
 import Alert from "react-bootstrap/Alert";
 import { addOrganizationNgoApi } from "../../services/api";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const InitialValues ={
   oType : "",
@@ -42,7 +43,16 @@ export default function OrganizationRegistration() {
       const addOrganization = async () => {
       
         await addOrganizationNgoApi(org);
-        alert("Organization Registration Successfull please click ok to navigate");
+        toast.success('🦄 Registration of Organization Successfull..!!!', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          });
+          navigate("/LogIn");
           
     }  
     const styles = {

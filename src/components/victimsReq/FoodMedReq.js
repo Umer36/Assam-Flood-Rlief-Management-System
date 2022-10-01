@@ -44,10 +44,28 @@ function RescueForm() {
   })
     .then(function (response) {
       console.log(response);
+      toast.success('🦄 Food & Medical Request Generated Successfully..!!!', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
       navigate("/victims/foodMedReceipt");
     })
     .catch(function (error) {
       console.log(error);
+      toast.error('🦄 Oopss something went wrong..!!!', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
     });
     
   };

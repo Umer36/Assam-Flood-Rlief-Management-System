@@ -83,7 +83,7 @@ function RequestSlip() {
 
               <Row className="pt-5">
                 <Col>
-                  <Button variant="success" type="submit">
+                  <Button variant="success" onClick={navigate("/")} type="submit">
                     Print
                   </Button>
                 </Col>

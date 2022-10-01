@@ -6,6 +6,7 @@ import Card from "react-bootstrap/Card";
 import Alert from "react-bootstrap/Alert";
 import { addVolunteerApi } from '../../services/api';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 
 const InitialValues ={
@@ -34,7 +35,15 @@ export default function VolunteerRegistration() {
 
     const addVolunteer = async () => {
         await addVolunteerApi(volunteer);
-        alert("Organization Registration Successfull please click ok to navigate");
+        toast.success('🦄 Registration of Volunteer Successfull..!!!', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          });
         navigate('/LogIn');   
     }
     const styles = {
