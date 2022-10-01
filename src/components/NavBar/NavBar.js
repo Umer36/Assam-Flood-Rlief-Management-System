@@ -23,6 +23,7 @@ export default function NavBar() {
       doLogOut(()=>{
         //logged out
         setLogin(false);
+        
       })
   }
 
@@ -54,8 +55,8 @@ export default function NavBar() {
             {
               login && (
                <>
-                <Link to="/Home">
-                <Button  variant="outline-success" onClick={logout}>
+                <Link to="/">
+                <Button  variant="outline-success" onClick={logout} >
                   LogOut
                 </Button>{" "}
                 </Link>
