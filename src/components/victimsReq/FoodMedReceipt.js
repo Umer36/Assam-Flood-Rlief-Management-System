@@ -9,9 +9,11 @@ import { useState, useEffect } from "react";
 
 import { Table } from "react-bootstrap";
 import { User } from "./FoodMedReq";
+import { useNavigate } from "react-router-dom";
 
 function FoodMedReceipt() {
   const [reliefData, setVictims] = useState({});
+  const navigate=useNavigate();
   console.log("testing");
   useEffect(() => {
     getreliefData();

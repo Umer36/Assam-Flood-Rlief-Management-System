@@ -10,6 +10,7 @@ import Alert from "react-bootstrap/Alert";
 import { addRescueRequest } from "../../services/api";
 import { getCurrentUserDetail, getToken } from "../../auth";
 import axios from "axios";
+import { toast } from "react-toastify";
 let User;
 function RescueForm() {
   const initialInput = {
