@@ -5,10 +5,13 @@ import Alert from "react-bootstrap/Alert";
 import { Stack } from "react-bootstrap";
 import { Table } from "react-bootstrap";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 // import { getvictim } from "../../api/victimdetailsbedbooking";
 
 function ShelterBookingReceipt() {
   const [victimdetails, setVictimdetails] = useState([]);
+  const navigate = useNavigate();
 
   // useEffect(() => {
   //      const getdetails=async()=>{
@@ -99,7 +102,9 @@ function ShelterBookingReceipt() {
               </Table>
 
               <div className="d-flex justify-content-center mt-5">
-                <Button variant="success" type="submit">
+                <Button variant="success"  onClick={(e) => {
+                        navigate("/victims/dashboard");
+                      }} type="submit">
                   Print
                 </Button>
               </div>
@@ -110,5 +115,8 @@ function ShelterBookingReceipt() {
     </>
   );
 }
+
+
+
 
 export default ShelterBookingReceipt;

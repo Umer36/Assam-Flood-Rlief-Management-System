@@ -1,8 +1,10 @@
 import React from 'react'
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
-import { Link } from 'react-router-dom'
+
 import Carousel from "react-bootstrap/Carousel";
+import { useNavigate } from 'react-router-dom';
 export default function Home() {
+  const navigate = useNavigate();
   return (
     <>
     <Row>
@@ -43,7 +45,9 @@ export default function Home() {
                 src={require("../../images/alert.jpeg")}
               />
               <div className="d-grid gap-2">
-                <Button variant="secondary" size="sm">
+                <Button variant="secondary" size="sm" onClick={(e) => {
+                        navigate("/victims/dashboard");
+                      }}>
                   Rescue
                 </Button>
               </div>
@@ -55,7 +59,9 @@ export default function Home() {
                 src={require("../../images/medical.png")}
               />
               <div className="d-grid gap-2 pt-1">
-                <Button variant="secondary" size="sm">
+                <Button variant="secondary" size="sm" onClick={(e) => {
+                        navigate("/victims/dashboard");
+                      }}>
                   Medical / Shelter
                 </Button>
               </div>
@@ -79,7 +85,9 @@ export default function Home() {
                 src={require("../../images/helpinghand.jpeg")}
               />
               <div className="d-grid gap-2">
-                <Button variant="secondary" size="sm">
+                <Button variant="secondary" size="sm" onClick={(e) => {
+                        navigate("/donationhome");
+                      }}>
                   Donation
                 </Button>
               </div>

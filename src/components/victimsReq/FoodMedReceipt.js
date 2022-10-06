@@ -152,7 +152,17 @@ function FoodMedReceipt() {
                 <Button variant="success" onClick={navigate("/")} type="submit">
                   Print
                 </Button>
+                
               </div>
+              <div className="d-flex justify-content-center mt-5">
+                
+                <Button variant="success"  onClick={(e) => {
+                        navigate("/victims/dashboard");
+                      }} type="submit">
+                  Back
+                </Button>
+              </div>
+              
             </Form>
           </Card>
         </div>

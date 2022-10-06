@@ -8,6 +8,8 @@ import { useState } from "react";
 import { getToken } from "../../auth";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { AWS_API, LOCAL_API } from "../../services/api";
+
 
 // import { addRelief } from "../../api/api";
 let User;
@@ -38,7 +40,8 @@ function RescueForm() {
     const tt= getToken();
     console.log(tt);
 
-    axios.post('http://afmsapiapp-env.eba-ssyuxjp8.ap-south-1.elasticbeanstalk.com/api/v1/foodmedical/request',inputs ,{
+    //if amazon server then use AWS_API
+    axios.post(`${LOCAL_API}/foodmedical/request`,inputs ,{
     headers:{
       Accept: 'application/json',
      'Content-Type': 'application/json',

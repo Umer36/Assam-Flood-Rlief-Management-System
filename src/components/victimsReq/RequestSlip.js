@@ -91,7 +91,7 @@ function RequestSlip() {
                   <span className="d-flex justify-content-end">
                     <Button
                       onClick={(e) => {
-                        navigate("/victims/rescueForm");
+                        navigate("/victims/dashboard");
                       }}
                       variant="success"
                       type="submit"

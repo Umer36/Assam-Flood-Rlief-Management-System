@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "react-bootstrap";
 import Card from 'react-bootstrap/Card';
-import { Adddonator } from "../../services/api";
+
 import Alert from "react-bootstrap/Alert";
 
 function Donationhome() {

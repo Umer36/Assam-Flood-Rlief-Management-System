@@ -7,10 +7,12 @@ import { useNavigate } from "react-router-dom";
 
 import { useEffect, useState } from "react";
 import Alert from "react-bootstrap/Alert";
-import { addRescueRequest } from "../../services/api";
+import { addRescueRequest, AWS_API, LOCAL_API } from "../../services/api";
 import { getCurrentUserDetail, getToken } from "../../auth";
 import axios from "axios";
 import { toast } from "react-toastify";
+
+
 let User;
 function RescueForm() {
   const initialInput = {
@@ -39,7 +41,8 @@ function RescueForm() {
     const tt= getToken();
     console.log(tt);
 
-    axios.post('http://afmsapiapp-env.eba-ssyuxjp8.ap-south-1.elasticbeanstalk.com/api/v1/rescue/request',inputs ,{
+    //if amazon sevrer then use AWS_API
+    axios.post(`${LOCAL_API}/rescue/request`,inputs ,{
     headers:{
       Accept: 'application/json',
      'Content-Type': 'application/json',

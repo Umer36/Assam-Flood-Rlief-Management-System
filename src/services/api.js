@@ -9,71 +9,64 @@ import { privateAxios } from "../auth/PrivateAxios";
 
 
 
-const API_URL = " http://afmsapiapp-env.eba-ssyuxjp8.ap-south-1.elasticbeanstalk.com/api/v1";
-const API = " http://afmsapiapp-env.eba-ssyuxjp8.ap-south-1.elasticbeanstalk.com/api/v1/auth/register/victim";
-const API2 = "http://afmsapiapp-env.eba-ssyuxjp8.ap-south-1.elasticbeanstalk.com/api/v1/auth/login/victim";
-const API3 = "http://afmsapiapp-env.eba-ssyuxjp8.ap-south-1.elasticbeanstalk.com/api/v1/auth/register/orgs";
-const API4 = "http://afmsapiapp-env.eba-ssyuxjp8.ap-south-1.elasticbeanstalk.com/api/v1/auth/register/volunteer";
-const REQST = "http://afmsapiapp-env.eba-ssyuxjp8.ap-south-1.elasticbeanstalk.com/api/v1/rescue/request";
-const REQST1 = "http://127.0.0.1:8180/api/v1/foodmedical/request";
-
-
+const AWS_API ="http://afmsapiapp-env.eba-ssyuxjp8.ap-south-1.elasticbeanstalk.com/api/v1";
+const LOCAL_API ="http://localhost:8081/api/v1";
+export{AWS_API};
+export{LOCAL_API};
+//Api for victim registration
 export const addVictimsApi = (victim) =>{
 
     try{
-        return axios.post(API,victim).then((res)=>res.data);
+        return axios.post(`${LOCAL_API}/auth/register/victim`,victim).then((res)=>res.data);
     }catch(error){
         console.log("Error while calling addvictim api", error.messege);
     }
-}
-
-// export const addVictimsApi = async (victim) =>{
-//     try{
-//         return await axios.post(API , victim );
-//     }catch(error){
-//         console.log("Error while calling addVictim api" , error.messege );
-//     }
-// }  
+}   
 
 
+
+//api for ogranization registration
 export const addOrganizationNgoApi = async (org) =>{
     try{
-        return await axios.post(API3, org );
+        return await axios.post(`${LOCAL_API}/auth/register/orgs`, org );
     }catch(error){
         console.log("Error while calling addOrganization api" , error.messege );
     }
 } 
 
 
-
+//api for Voluneer registration
 export const addVolunteerApi = async (volunteer) =>{
     try{
-        return await axios.post(API4 , volunteer );
+        return await axios.post(`${LOCAL_API}/auth/register/volunteer` , volunteer );
     }catch(error){
         console.log("Error while calling addVolunteer api" , error.messege );
     }
 } 
 
+//api for get victim 
 export const getVictimsApi = async (id) => {
     id= id  || "";
     try{
-        return await axios.get(`${API_URL}/victims/${id}`);
+        return await axios.get(`${LOCAL_API}/victims/${id}`);
     }catch(error){
         console.log("Error while calling getVictims api ", error.messege);
     }
 }
 
+//api for get Organization 
 export const getOrganizationApi = async () => {
     try{
-        return await axios.get("http://afmsapiapp-env.eba-ssyuxjp8.ap-south-1.elasticbeanstalk.com/ngos");
+        return await axios.get(`${LOCAL_API}/ngos`);
     }catch(error){
         console.log("Error while calling getOrganization api ", error.messege);
     }
 }
 
+//api for get volunteer
 export const getVolunteerApi = async () => {
     try{
-        return await axios.get("http://afmsapiapp-env.eba-ssyuxjp8.ap-south-1.elasticbeanstalk.com/volunteer");
+        return await axios.get(`${LOCAL_API}/volunteer`);
     }catch(error){
         console.log("Error while calling getVolunteer api ", error.messege);
     }
@@ -92,26 +85,29 @@ export const getVolunteerApi = async () => {
 //     }
 // }
 
+//for login api
 export const getLoginApi = (login) =>{
-    return axios.post(API2,login).then((res)=>res.data)
+    return axios.post(`${LOCAL_API}/auth/login/victim`,login).then((res)=>res.data)
 }
 
 
 
-
+//for victim rescue request
 export const addRescueRequest = (inputs) =>{
         
             return axios
             .post(
-                REQST, inputs).then((res)=> res.data)
+                `${LOCAL_API}/rescue/request`, inputs).then((res)=> res.data)
                 
       
     }  ;
+
+    //for vcim relief reqest
     export const addRelief = (inputs) =>{
         
         return axios
         .post(
-            REQST1, inputs).then((res)=> res.data)
+            `${LOCAL_API}/foodmedical/request`, inputs).then((res)=> res.data)
             
   
 }  ;
@@ -125,10 +121,10 @@ export const addRescueRequest = (inputs) =>{
 //     }  
 
 
-
+//api for donator 
 export const Adddonator = async (data) => {
     try {
-       return await axios.post(`http://localhost:8085/api/v1/donations`, data);
+       return await axios.post(`${LOCAL_API}/donations`, data);
     }
     catch (error) {
        console.log("error with my side", error.message);

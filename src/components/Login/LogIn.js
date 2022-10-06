@@ -23,7 +23,7 @@ export default function LogIn() {
   const [login,setLogin] = useState(InitialValues);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
-  const [serverUser, setServerUser] = useState([]);
+  
   const navigate=useNavigate();
   
   

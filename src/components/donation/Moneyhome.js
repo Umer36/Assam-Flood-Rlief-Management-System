@@ -10,6 +10,7 @@ import axios from 'axios';
 import image from '../../images/logo.png';
 
 
+
 function loadScript(src) {
   return new Promise((resolve) => {
       const script = document.createElement("script");
@@ -66,7 +67,8 @@ const [selected, setSelected] = useState('yes');
           alert("Razorpay SDK failed to load. Are you online?");
           return;
       }
-      axios.post("http://afmsapiapp-env.eba-ssyuxjp8.ap-south-1.elasticbeanstalk.com/api/v1/donation",user).then((res)=>{
+     // axios.post("http://afmsapiapp-env.eba-ssyuxjp8.ap-south-1.elasticbeanstalk.com/api/v1/donation",user).then((res)=>{
+        axios.post("http://localhost:8081/api/v1/donation",user).then((res)=>{
         console.log(res.data);
         if(res.status==="created"){
 
