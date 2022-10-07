@@ -80,7 +80,8 @@ export default function LogIn() {
           console.log("test");
           e.preventDefault();
           setFormErrors(validate(login));
-          setIsSubmit(true);
+          if(Object.keys(formErrors).length===0){
+            setIsSubmit(true);
           if(login.roleType==="Victims"){
             console.log("Vitims ROle selected");
             // getVictimsDetails(login);
@@ -133,6 +134,8 @@ export default function LogIn() {
               //toast error
             })
           }
+          }
+          
             
         }  
         
@@ -210,7 +213,7 @@ export default function LogIn() {
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
-                <p>{formErrors.roleType}</p>
+                <p style={{color:"red"}}>{formErrors.roleType}</p>
               </Col>
             </Form.Group>
           </Form>
@@ -226,7 +229,7 @@ export default function LogIn() {
                 name="username"
               />{" "}
             </Col>
-            <p>{formErrors.username}</p>
+            <p style={{color:"red"}}>{formErrors.username}</p>
           </Form.Group>
           <Form.Group as={Row} className="mb-3" controlId="formBasicEmail">
             <Form.Label column sm={3}>
@@ -240,7 +243,7 @@ export default function LogIn() {
                 name="password"
               />{" "}
             </Col>
-            <p>{formErrors.password}</p>
+            <p style={{color:"red"}}>{formErrors.password}</p>
           </Form.Group>
           <Button
             onClick={(e) => loginUser(e)}

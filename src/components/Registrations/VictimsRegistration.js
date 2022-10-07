@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import {  Row , Col } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -24,21 +24,97 @@ const InitialValues = {
 export default function VictimsRegistration() {
 
     const [victim,setVictim] = useState(InitialValues) ;
+    const [formErrors, setFormErrors] = useState({});
     const navigate=useNavigate();
+    const [isSubmit, setIsSubmit] = useState(false);
 
     const onValueChange = (e) =>{
         console.log(e.target.name,e.target.value);
-        setVictim({...victim, [e.target.name] : e.target.value})
+        setVictim({...victim, [e.target.name] : e.target.value})     //spread operator for getting it for all variables
         console.log(victim);
     }
+    useEffect(() => {
+      console.log(formErrors);
+      if (Object.keys(formErrors).length === 0 && addVictims) {
+        console.log(victim);
+      }
+    }, [formErrors]); 
+
+    const validate = (values) => {
+      const errors = {};
+      
+      if (!values.username) {
+        errors.username = "Username is required!";
+        //toast errors and return
+      }
+      if (!values.vfirstName) {
+        errors.vfirstName = "Type Of vfirstName is Required!";
+      } 
+      if (!values.vlastName) {
+        errors.vlastName = "Type Of vlastName is Required!";
+      } 
+      if (!values.vMobno) {
+        errors.vMobno = "Type Of vMobno is Required!";
+      }else if(values.vMobno.length<10){
+        errors.vMobno = "vMobno must be more than 10 characters";
+      }else if(values.vMobno.length>10){
+        errors.vMobno = "vMobno must be less than 10 characters";
+      }  
+      if (!values.vAddress) {
+        errors.vAddress = "Type Of vAddress is Required!";
+      } 
+      if (!values.password) {
+        errors.password = "Password is required";
+      } else if (values.password.length < 4) {
+        errors.password = "Password must be more than 4 characters";
+      } else if (values.password.length > 10) {
+        errors.password = "Password cannot exceed more than 10 characters";
+      }
+      return errors;
+    };
 
     const addVictims =  (e) => {
         e.preventDefault();
         console.log(victim);
-        addVictimsApi(victim).then((res)=>{
-          console.log(res);
-          console.log("Success regitered");
-          toast.success('🦄 Registration of Victim Successfull..!!!', {
+        setFormErrors(validate(victim));
+        // if (Object.keys(formErrors).length === 0 && addVictims) {
+        //   console.log(victim);
+        // }
+        const dd =Object.keys(formErrors).length;
+        console.log(dd);
+        if(Object.keys(formErrors).length===0){
+          setIsSubmit(true);
+          addVictimsApi(victim).then((res)=>{
+            console.log(res);
+            console.log("Success regitered");
+            toast.success('🦄 Registration of Victim Successfull..!!!', {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              });
+              navigate('/LogIn');
+          }).catch((error)=>{
+            console.log(error);
+            console.log("Error registre");
+            toast.error('🦄 Oopss Server Error..!!!', {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              });
+          })
+          
+          ;
+          
+        }else{
+          toast.error('🦄 Oopss Enter valid details..!!!', {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -47,15 +123,12 @@ export default function VictimsRegistration() {
             draggable: true,
             progress: undefined,
             });
-        }).catch((error)=>{
-          console.log(error);
-          console.log("Error registre");
-        })
-        
-        ;
+        }
         
         
-        navigate('/LogIn');
+       
+        
+        
     }
 
     const styles = {
@@ -89,6 +162,7 @@ export default function VictimsRegistration() {
                   required
                 />
               </Col>
+              <p style={{color:"red"}}>{formErrors.vfirstName}</p>
             </Form.Group>
             <Form.Group as={Row} className="mb-3" controlId="formBasicEmail">
               <Form.Label column sm={3}>
@@ -103,6 +177,7 @@ export default function VictimsRegistration() {
                   required
                 />
               </Col>
+              <p style={{color:"red"}}>{formErrors.vlastName}</p>
             </Form.Group>
             <Form.Group as={Row} className="mb-3" controlId="formBasicEmail">
               <Form.Label column sm={3}>
@@ -117,6 +192,7 @@ export default function VictimsRegistration() {
                   required
                 />
               </Col>
+              <p style={{color:"red"}}>{formErrors.vMobno}</p>
             </Form.Group>
             <Form.Group as={Row} className="mb-3" controlId="formBasicEmail">
               <Form.Label column sm={3}>
@@ -132,6 +208,7 @@ export default function VictimsRegistration() {
                   required
                 />
               </Col>
+              <p style={{color:"red"}}>{formErrors.vAddress}</p>
             </Form.Group>
             <Form.Group as={Row} className="mb-3" controlId="formBasicEmail">
               <Form.Label column sm={3}>
@@ -173,6 +250,7 @@ export default function VictimsRegistration() {
                   required
                 />
               </Col>
+              <p style={{color:"red"}}>{formErrors.username}</p>
             </Form.Group>
             <Form.Group as={Row} className="mb-3" controlId="formBasicEmail">
               <Form.Label column sm={3}>
@@ -187,6 +265,7 @@ export default function VictimsRegistration() {
                   required
                 />
               </Col>
+              <p style={{color:"red"}}>{formErrors.password}</p>
             </Form.Group>
            
 

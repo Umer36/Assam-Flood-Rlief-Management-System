@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState ,useEffect} from 'react'
 import {  Row,Col  } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -24,7 +24,9 @@ const InitialValues ={
 }
 export default function VolunteerRegistration() {
 
-    const [volunteer,setVolunteer] = useState(InitialValues) ;
+    const [volunteer,setVolunteer] = useState(InitialValues);
+    const [formErrors, setFormErrors] = useState({});
+    const [isSubmit, setIsSubmit] = useState(false);
     const navigate = useNavigate();
 
     const onValueChange = (e) =>{
@@ -32,19 +34,69 @@ export default function VolunteerRegistration() {
         setVolunteer({...volunteer, [e.target.name] : e.target.value})
         console.log(volunteer);
     };
+    useEffect(() => {
+      console.log(formErrors);
+      if (Object.keys(formErrors).length === 0 && addVolunteer) {
+        console.log(volunteer);
+      }
+    }, [formErrors]); 
 
-    const addVolunteer = async () => {
-        await addVolunteerApi(volunteer);
-        toast.success('🦄 Registration of Volunteer Successfull..!!!', {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          });
-        navigate('/LogIn');   
+    const validate = (values) => {
+      const errors = {};
+      
+      if (!values.username) {
+        errors.username = "Username is required!";
+        //toast errors and return
+      }
+      if (!values.volFname) {
+        errors.volFname = "Type Of volFname is Required!";
+      } 
+      if (!values.volLname) {
+        errors.volLname = "Type Of volLname is Required!";
+      } 
+      if (!values.volMobNo) {
+        errors.volMobNo = "Type Of volMobNo is Required!";
+      }else if(values.volMobNo.length<10){
+        errors.volMobNo = "volMobNo must be more than 10 characters";
+      }else if(values.volMobNo.length>10){
+        errors.volMobNo = "volMobNo must be less than 10 characters";
+      }  
+      if (!values.volAddress) {
+        errors.volAddress = "Type Of volAddress is Required!";
+      } 
+      if (!values.password) {
+        errors.password = "Password is required";
+      } else if (values.password.length < 4) {
+        errors.password = "Password must be more than 4 characters";
+      } else if (values.password.length > 10) {
+        errors.password = "Password cannot exceed more than 10 characters";
+      }
+      return errors;
+    };
+
+
+    const addVolunteer =  (e) => {
+         e.preventDefault();
+        console.log(volunteer);
+        setFormErrors(validate(volunteer));
+        setIsSubmit(true);
+         addVolunteerApi(volunteer).then((res)=>{
+            console.log(res);
+            toast.success('🦄 Registration of Volunteer Successfull..!!!', {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              });
+            navigate('/LogIn');   
+         }).catch((error)=>{
+          console.log(error);
+          console.log("Error registre");
+        })
+        
     }
     const styles = {
       cardstyle: {
@@ -75,6 +127,7 @@ export default function VolunteerRegistration() {
                   required
                 />{" "}
               </Col>
+              <p style={{color:"red"}}>{formErrors.volFname}</p>
             </Form.Group>
             <Form.Group as={Row} className="mb-3" controlId="formBasicEmail">
               <Form.Label column sm={3}>
@@ -89,6 +142,7 @@ export default function VolunteerRegistration() {
                   required
                 />{" "}
               </Col>
+              <p style={{color:"red"}}>{formErrors.volLname}</p>
             </Form.Group>
             <Form.Group as={Row} className="mb-3" controlId="formBasicEmail">
               <Form.Label column sm={3}>
@@ -103,6 +157,7 @@ export default function VolunteerRegistration() {
                   required
                 />{" "}
               </Col>
+              <p style={{color:"red"}}>{formErrors.volMobNo}</p>
             </Form.Group>
             <Form.Group as={Row} className="mb-3" controlId="formBasicEmail">
               <Form.Label column sm={3}>
@@ -117,6 +172,7 @@ export default function VolunteerRegistration() {
                   required
                 />{" "}
               </Col>
+              <p style={{color:"red"}}>{formErrors.volAddress}</p>
             </Form.Group>
             <Form.Group as={Row} className="mb-3" controlId="formBasicEmail">
               <Form.Label column sm={3}>
@@ -186,6 +242,7 @@ export default function VolunteerRegistration() {
                   required
                 />{" "}
               </Col>
+              <p style={{color:"red"}}>{formErrors.username}</p>
             </Form.Group>
             <Form.Group as={Row} className="mb-3" controlId="formBasicEmail">
               <Form.Label column sm={3}>
@@ -200,6 +257,7 @@ export default function VolunteerRegistration() {
                   required
                 />{" "}
               </Col>
+              <p style={{color:"red"}}>{formErrors.password}</p>
             </Form.Group>
             
 
@@ -208,7 +266,7 @@ export default function VolunteerRegistration() {
             </Form.Group>
             <div className="pt-4">
               <Button
-                onClick={() => addVolunteer()}
+                onClick={(e) => addVolunteer(e)}
                 variant="success"
                 type="submit"
               >

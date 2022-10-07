@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Row ,Col  } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -27,6 +27,8 @@ const InitialValues ={
 export default function OrganizationRegistration() {
 
     const [org,setOrg] = useState(InitialValues);
+    const [formErrors, setFormErrors] = useState({});
+    const [isSubmit, setIsSubmit] = useState(false);
     const navigate=useNavigate();
 
 
@@ -40,19 +42,68 @@ export default function OrganizationRegistration() {
         setOrg({...org, [e.target.name] : e.target.value})
         console.log(org);
       }
-      const addOrganization = async () => {
-      
-        await addOrganizationNgoApi(org);
-        toast.success('🦄 Registration of Organization Successfull..!!!', {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          });
-          navigate("/LogIn");
+      useEffect(() => {
+        console.log(formErrors);
+        if (Object.keys(formErrors).length === 0 && addOrganization) {
+          console.log(org);
+        }
+      }, [formErrors]); 
+  
+      const validate = (values) => {
+        const errors = {};
+        
+        if (!values.username) {
+          errors.username = "Username is required!";
+          //toast errors and return
+        }
+        if (!values.oName) {
+          errors.oName = "Type Of oName is Required!";
+        } 
+        if (!values.oAuthName) {
+          errors.oAuthName = "Type Of oAuthName is Required!";
+        } 
+        if (!values.oMobNo) {
+          errors.oMobNo = "Type Of oMobNo is Required!";
+        }else if(values.oMobNo.length<10){
+          errors.oMobNo = "oMobNo must be more than 10 characters";
+        }else if(values.oMobNo.length>10){
+          errors.oMobNo = "oMobNo must be less than 10 characters";
+        }  
+        if (!values.oAddress) {
+          errors.oAddress = "Type Of oAddress is Required!";
+        } 
+        if (!values.password) {
+          errors.password = "Password is required";
+        } else if (values.password.length < 4) {
+          errors.password = "Password must be more than 4 characters";
+        } else if (values.password.length > 10) {
+          errors.password = "Password cannot exceed more than 10 characters";
+        }
+        return errors;
+      };
+
+      const addOrganization =  (e) => {
+        e.preventDefault();
+        setFormErrors(validate(org));
+        setIsSubmit(true);
+         addOrganizationNgoApi(org).then((res)=>{
+            console.log(res);
+            toast.success('🦄 Registration of Organization Successfull..!!!', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            });
+            navigate("/LogIn");
+        }).catch((error)=>{
+          console.log(error);
+          console.log("Error registre");
+        })
+        
+        
           
     }  
     const styles = {
@@ -123,6 +174,7 @@ export default function OrganizationRegistration() {
                 required
               />{" "}
             </Col>
+            <p style={{color:"red"}}>{formErrors.oName}</p>
           </Form.Group>
           <Form.Group as={Row} className="mb-3" controlId="formBasicEmail">
             <Form.Label column sm={3}>
@@ -137,6 +189,7 @@ export default function OrganizationRegistration() {
                 required
               />{" "}
             </Col>
+            <p style={{color:"red"}}>{formErrors.oAuthName}</p>
           </Form.Group>
           <Form.Group as={Row} className="mb-3" controlId="formBasicEmail">
             <Form.Label column sm={3}>
@@ -151,6 +204,7 @@ export default function OrganizationRegistration() {
                 required
               />{" "}
             </Col>
+            <p style={{color:"red"}}>{formErrors.oMobNo}</p>
           </Form.Group>
           <Form.Group as={Row} className="mb-3" controlId="formBasicEmail">
             <Form.Label column sm={3}>
@@ -165,6 +219,7 @@ export default function OrganizationRegistration() {
                 required
               />{" "}
             </Col>
+            <p style={{color:"red"}}>{formErrors.oAddress}</p>
           </Form.Group>
           <Form.Group as={Row} className="mb-3" controlId="formBasicEmail">
             <Form.Label column sm={3}>
@@ -231,6 +286,7 @@ export default function OrganizationRegistration() {
                 required
               />{" "}
             </Col>
+            <p style={{color:"red"}}>{formErrors.username}</p>
           </Form.Group>
           <Form.Group as={Row} className="mb-3" controlId="formBasicEmail">
             <Form.Label column sm={3}>
@@ -245,6 +301,7 @@ export default function OrganizationRegistration() {
                 required
               />{" "}
             </Col>
+            <p style={{color:"red"}}>{formErrors.password}</p>
           </Form.Group>
          
           <Form.Group className="mb-3" controlId="formBasicCheckbox">
@@ -252,7 +309,7 @@ export default function OrganizationRegistration() {
           </Form.Group>
           <div className="pt-4">
             <Button
-              onClick={() => addOrganization()}
+              onClick={(e) => addOrganization(e)}
               variant="success"
               type="submit"
             >

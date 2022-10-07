@@ -26,9 +26,9 @@ export const addVictimsApi = (victim) =>{
 
 
 //api for ogranization registration
-export const addOrganizationNgoApi = async (org) =>{
+export const addOrganizationNgoApi =  (org) =>{
     try{
-        return await axios.post(`${LOCAL_API}/auth/register/orgs`, org );
+        return axios.post(`${LOCAL_API}/auth/register/orgs`, org ).then((res)=>res.data);
     }catch(error){
         console.log("Error while calling addOrganization api" , error.messege );
     }
@@ -36,9 +36,9 @@ export const addOrganizationNgoApi = async (org) =>{
 
 
 //api for Voluneer registration
-export const addVolunteerApi = async (volunteer) =>{
+export const addVolunteerApi =  (volunteer) =>{
     try{
-        return await axios.post(`${LOCAL_API}/auth/register/volunteer` , volunteer );
+        return  axios.post(`${LOCAL_API}/auth/register/volunteer` , volunteer ).then((res)=>res.data);
     }catch(error){
         console.log("Error while calling addVolunteer api" , error.messege );
     }

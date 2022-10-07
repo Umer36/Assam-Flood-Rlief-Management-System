@@ -42,7 +42,7 @@ function App() {
         <BrowserRouter>
         <ToastContainer />
         <Header1/>
-        <marquee behavior="slide" direction="left"><h1 style={{color: "red"}}><b><u>ASSAM EMERGENCY HELPLINE NUMBER :- 932042131313/2342482</u></b></h1></marquee>
+        <marquee behavior="slide" direction="left"><h1 style={{color: "red"}}><b><u>ASSAM EMERGENCY HELPLINE NUMBER :- 932042131313/2342482 </u></b></h1></marquee>
 
           <Routes>
             {/* .....Umer routes */}
